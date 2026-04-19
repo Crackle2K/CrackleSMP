@@ -148,7 +148,7 @@ function renderFactionDetail(id) {
         <div class="member-list">
           ${factionMembers.map(m => `
             <div class="member-row" onclick="navigate('members','${m.id}')">
-              <img class="member-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.src='assets/favicon/favicon.png'" />
+              <img class="member-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
               <div class="member-row-info">
                 <span class="member-row-name">${m.username}</span>
                 <span class="member-row-role">${m.role}</span>
@@ -287,7 +287,7 @@ function renderMembers() {
         const f = getFaction(m.faction);
         return `
           <div class="member-card" onclick="navigate('members','${m.id}')" ${f ? `style="--accent:${f.color}"` : ''}>
-            <img class="member-card-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.src='assets/favicon/favicon.png'" />
+            <img class="member-card-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
             <h2 class="member-card-name">${m.username}</h2>
             <span class="member-card-role">${m.role}</span>
             ${f ? factionBadge(m.faction) : ''}
@@ -313,7 +313,7 @@ function renderMemberDetail(id) {
     </div>
 
     <div class="detail-hero member-detail-hero" ${f ? `style="--accent:${f.color}"` : ''}>
-      <img class="member-detail-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.src='assets/favicon/favicon.png'" />
+      <img class="member-detail-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
       <div class="detail-hero-text">
         <h1>${m.username}</h1>
         <p>${m.description}</p>

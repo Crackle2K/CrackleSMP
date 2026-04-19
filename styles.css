@@ -53,10 +53,9 @@ header {
   user-select: none;
 }
 
-.logo-icon {
-  width: 32px;
-  height: 32px;
-  image-rendering: pixelated;
+.logo-icon-emoji {
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
 .logo-title {
