@@ -37,6 +37,17 @@ function getFaction(id) { return DATA.factions.find(f => f.id === id); }
 function getPoi(id)     { return DATA.pois.find(p => p.id === id); }
 function getMember(id)  { return DATA.members.find(m => m.id === id); }
 
+function getMemberFactionIds(member) {
+  if (Array.isArray(member.factions)) return member.factions;
+  if (member.faction) return [member.faction];
+  return [];
+}
+
+function getRoleInFaction(member, factionId) {
+  if (member.factionRoles && member.factionRoles[factionId]) return member.factionRoles[factionId];
+  return member.role || 'Member';
+}
+
 function factionBadge(factionId) {
   const f = getFaction(factionId);
   if (!f) return '';
@@ -133,7 +144,7 @@ function renderFactionDetail(id) {
               <img class="member-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
               <div class="member-row-info">
                 <span class="member-row-name">${m.username}</span>
-                <span class="member-row-role">${m.role}</span>
+                <span class="member-row-role">${getRoleInFaction(m, f.id)}</span>
               </div>
             </div>
           `).join('')}
@@ -266,13 +277,18 @@ function renderMembers() {
     </div>
     <div class="members-grid">
       ${DATA.members.map(m => {
-        const f = getFaction(m.faction);
+        const factionIds = getMemberFactionIds(m);
+        const factions = factionIds.map(getFaction).filter(Boolean);
+        const primaryFaction = factions[0] || null;
+        const roleSummary = factions.length
+          ? factions.map(f => `${getRoleInFaction(m, f.id)} (${f.name})`).join(', ')
+          : (m.role || 'Member');
         return `
-          <div class="member-card" onclick="navigate('members','${m.id}')" ${f ? `style="--accent:${f.color}"` : ''}>
+          <div class="member-card" onclick="navigate('members','${m.id}')" ${primaryFaction ? `style="--accent:${primaryFaction.color}"` : ''}>
             <img class="member-card-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
             <h2 class="member-card-name">${m.username}</h2>
-            <span class="member-card-role">${m.role}</span>
-            ${f ? factionBadge(m.faction) : ''}
+            <span class="member-card-role">${roleSummary}</span>
+            ${factions.map(f => factionBadge(f.id)).join('')}
             <p class="member-card-specialty">${m.specialty}</p>
           </div>
         `;
@@ -286,7 +302,9 @@ function renderMembers() {
 function renderMemberDetail(id) {
   const m = getMember(id);
   if (!m) { renderMembers(); return; }
-  const f = getFaction(m.faction);
+  const factionIds = getMemberFactionIds(m);
+  const factions = factionIds.map(getFaction).filter(Boolean);
+  const primaryFaction = factions[0] || null;
   const memberPois = DATA.pois.filter(p => p.builder === m.id);
 
   app.innerHTML = `
@@ -294,7 +312,7 @@ function renderMemberDetail(id) {
       <button onclick="navigate('members')" class="back-btn">Back to Members</button>
     </div>
 
-    <div class="detail-hero member-detail-hero" ${f ? `style="--accent:${f.color}"` : ''}>
+    <div class="detail-hero member-detail-hero" ${primaryFaction ? `style="--accent:${primaryFaction.color}"` : ''}>
       <img class="member-detail-avatar" src="${skinUrl(m.username)}" alt="${m.username}" onerror="this.style.display='none'" />
       <div class="detail-hero-text">
         <h1>${m.username}</h1>
@@ -308,8 +326,8 @@ function renderMemberDetail(id) {
         <span class="info-value">${m.role}</span>
       </div>
       <div class="info-block">
-        <span class="info-label">Faction</span>
-        <span class="info-value">${f ? `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.name}</span>` : 'Independent'}</span>
+        <span class="info-label">Factions</span>
+        <span class="info-value">${factions.length ? factions.map(f => `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.name}</span>`).join(', ') : 'Independent'}</span>
       </div>
       <div class="info-block">
         <span class="info-label">Joined</span>
