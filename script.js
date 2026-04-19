@@ -1,5 +1,4 @@
 const app = document.getElementById('app');
-const navBtns = document.querySelectorAll('.nav-btn');
 
 // ── Router ──────────────────────────────────────────────────────────────────
 
@@ -22,21 +21,15 @@ function render() {
   const page = getPage();
   const slug = getSlug();
 
-  navBtns.forEach(b => b.classList.toggle('active', b.dataset.page === page));
-
-  if (page === 'home')             renderHome();
+  if (page === 'home')                  renderHome();
   else if (page === 'factions' && slug) renderFactionDetail(slug);
-  else if (page === 'factions')    renderFactions();
-  else if (page === 'pois' && slug) renderPoiDetail(slug);
-  else if (page === 'pois')        renderPois();
-  else if (page === 'members' && slug) renderMemberDetail(slug);
-  else if (page === 'members')     renderMembers();
-  else                             renderHome();
+  else if (page === 'factions')         renderFactions();
+  else if (page === 'pois' && slug)     renderPoiDetail(slug);
+  else if (page === 'pois')             renderPois();
+  else if (page === 'members' && slug)  renderMemberDetail(slug);
+  else if (page === 'members')          renderMembers();
+  else                                  renderHome();
 }
-
-navBtns.forEach(btn => {
-  btn.addEventListener('click', () => navigate(btn.dataset.page));
-});
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -47,7 +40,7 @@ function getMember(id)  { return DATA.members.find(m => m.id === id); }
 function factionBadge(factionId) {
   const f = getFaction(factionId);
   if (!f) return '';
-  return `<span class="badge" style="background:${f.color}20;color:${f.color};border-color:${f.color}40">${f.banner} ${f.name}</span>`;
+  return `<span class="badge" style="background:${f.color}20;color:${f.color};border-color:${f.color}40">${f.name}</span>`;
 }
 
 function skinUrl(username) {
@@ -65,17 +58,14 @@ function renderHome() {
 
     <section class="home-grid">
       <div class="home-card" onclick="navigate('factions')">
-        <div class="home-card-icon">⚔️</div>
         <h2>Factions</h2>
         <p>${DATA.factions.length} factions &mdash; alliances, territories, and rivalries.</p>
       </div>
       <div class="home-card" onclick="navigate('pois')">
-        <div class="home-card-icon">📍</div>
         <h2>Points of Interest</h2>
         <p>${DATA.pois.length} locations &mdash; bases, farms, outposts, and landmarks.</p>
       </div>
       <div class="home-card" onclick="navigate('members')">
-        <div class="home-card-icon">🧑‍🤝‍🧑</div>
         <h2>Members</h2>
         <p>${DATA.members.length} players &mdash; roles, specialties, and stories.</p>
       </div>
@@ -86,7 +76,6 @@ function renderHome() {
       <div class="faction-strip">
         ${DATA.factions.map(f => `
           <div class="faction-strip-item" onclick="navigate('factions','${f.id}')" style="border-color:${f.color}">
-            <span class="strip-banner">${f.banner}</span>
             <span class="strip-name" style="color:${f.color}">${f.name}</span>
             <span class="strip-count">${f.members.length} members &bull; ${f.pois.length} POIs</span>
           </div>
@@ -107,12 +96,11 @@ function renderFactions() {
     <div class="card-grid">
       ${DATA.factions.map(f => `
         <div class="card faction-card" onclick="navigate('factions','${f.id}')" style="--accent:${f.color}">
-          <div class="card-banner">${f.banner}</div>
           <h2 class="card-title" style="color:${f.color}">${f.name}</h2>
           <p class="card-desc">${f.description}</p>
           <div class="card-meta">
-            <span>👤 ${f.members.length} members</span>
-            <span>📍 ${f.pois.length} POIs</span>
+            <span>${f.members.length} members</span>
+            <span>${f.pois.length} POIs</span>
           </div>
         </div>
       `).join('')}
@@ -131,11 +119,10 @@ function renderFactionDetail(id) {
 
   app.innerHTML = `
     <div class="detail-back">
-      <button onclick="navigate('factions')" class="back-btn">← Back to Factions</button>
+      <button onclick="navigate('factions')" class="back-btn">Back to Factions</button>
     </div>
 
     <div class="detail-hero" style="--accent:${f.color}">
-      <div class="detail-banner">${f.banner}</div>
       <div class="detail-hero-text">
         <h1 style="color:${f.color}">${f.name}</h1>
         <p>${f.description}</p>
@@ -205,7 +192,7 @@ function renderPois() {
             <p class="card-desc">${p.description}</p>
             <div class="card-meta">
               ${f ? factionBadge(p.faction) : ''}
-              <span class="coords-inline">📍 ${p.coordinates}</span>
+              <span class="coords-inline">${p.coordinates}</span>
             </div>
           </div>
         `;
@@ -235,7 +222,7 @@ function renderPoiDetail(id) {
 
   app.innerHTML = `
     <div class="detail-back">
-      <button onclick="navigate('pois')" class="back-btn">← Back to POIs</button>
+      <button onclick="navigate('pois')" class="back-btn">Back to POIs</button>
     </div>
 
     <div class="detail-hero" ${f ? `style="--accent:${f.color}"` : ''}>
@@ -264,7 +251,7 @@ function renderPoiDetail(id) {
       </div>
       <div class="info-block">
         <span class="info-label">Faction</span>
-        <span class="info-value">${f ? `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.banner} ${f.name}</span>` : 'Independent'}</span>
+        <span class="info-value">${f ? `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.name}</span>` : 'Independent'}</span>
       </div>
       <div class="info-block">
         <span class="info-label">Built by</span>
@@ -291,7 +278,7 @@ function renderMembers() {
             <h2 class="member-card-name">${m.username}</h2>
             <span class="member-card-role">${m.role}</span>
             ${f ? factionBadge(m.faction) : ''}
-            <p class="member-card-specialty">🎯 ${m.specialty}</p>
+            <p class="member-card-specialty">${m.specialty}</p>
           </div>
         `;
       }).join('')}
@@ -309,7 +296,7 @@ function renderMemberDetail(id) {
 
   app.innerHTML = `
     <div class="detail-back">
-      <button onclick="navigate('members')" class="back-btn">← Back to Members</button>
+      <button onclick="navigate('members')" class="back-btn">Back to Members</button>
     </div>
 
     <div class="detail-hero member-detail-hero" ${f ? `style="--accent:${f.color}"` : ''}>
@@ -327,7 +314,7 @@ function renderMemberDetail(id) {
       </div>
       <div class="info-block">
         <span class="info-label">Faction</span>
-        <span class="info-value">${f ? `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.banner} ${f.name}</span>` : 'Independent'}</span>
+        <span class="info-value">${f ? `<span onclick="navigate('factions','${f.id}')" class="link-span" style="color:${f.color}">${f.name}</span>` : 'Independent'}</span>
       </div>
       <div class="info-block">
         <span class="info-label">Joined</span>
@@ -341,7 +328,7 @@ function renderMemberDetail(id) {
 
     ${memberPois.length ? `
       <section class="detail-section">
-        <h2 class="section-title">Built By ${m.username} <span class="count-pill">${memberPois.length}</span></h2>
+        <h2 class="section-title">Built by ${m.username} <span class="count-pill">${memberPois.length}</span></h2>
         <div class="poi-list">
           ${memberPois.map(p => `
             <div class="poi-row" onclick="navigate('pois','${p.id}')">

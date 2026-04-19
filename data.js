@@ -5,7 +5,6 @@ const DATA = {
       name: "Iron Covenant",
       description: "A disciplined alliance of builders and traders who control the central market district. Known for their elaborate iron architecture and strict trade agreements.",
       color: "#a8a8a8",
-      banner: "⚔️",
       pois: ["central-market", "iron-fortress", "trade-post-north"],
       members: ["Crackle2K", "SteelForge99"]
     },
@@ -14,7 +13,6 @@ const DATA = {
       name: "Ember Clan",
       description: "Masters of the Nether who have built their base deep in the volcanic biomes. They specialize in redstone contraptions and blaze farming.",
       color: "#e85d04",
-      banner: "🔥",
       pois: ["nether-hub", "blaze-fortress", "lava-lake-outpost"],
       members: ["PyroKnight", "AshWalker"]
     },
@@ -23,7 +21,6 @@ const DATA = {
       name: "Verdant Order",
       description: "Peaceful terraformers and farmers occupying the eastern forests. They maintain the largest farms on the server and trade food with all factions.",
       color: "#40916c",
-      banner: "🌿",
       pois: ["great-farm", "forest-sanctuary", "oak-village"],
       members: ["LeafRunner", "MossBeard", "FernValley"]
     }

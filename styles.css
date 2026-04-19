@@ -2,13 +2,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0f1117;
-  --surface:   #181c25;
-  --surface2:  #1e2330;
-  --border:    #2a2f3e;
-  --text:      #e2e8f0;
-  --text-muted:#8892a4;
-  --accent:    #5b8dee;
+  --bg:        #0e150f;
+  --surface:   #162119;
+  --surface2:  #1c2b20;
+  --border:    #2a3f2e;
+  --text:      #ddeadd;
+  --text-muted:#7a9680;
+  --accent:    #8ab870;
   --radius:    10px;
   --radius-lg: 16px;
 }
@@ -29,7 +29,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15,17,23,0.92);
+  background: rgba(14,21,15,0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -38,57 +38,32 @@ header {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 60px;
+  height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
 }
 
 .logo {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  text-decoration: none;
+  align-items: baseline;
+  gap: 0.5rem;
+  cursor: pointer;
   user-select: none;
-}
-
-.logo-icon-emoji {
-  font-size: 1.6rem;
-  line-height: 1;
 }
 
 .logo-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--accent);
   letter-spacing: -0.3px;
 }
 
 .logo-sub {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
-  margin-left: 4px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
-
-nav { display: flex; gap: 0.25rem; }
-
-.nav-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: color 0.15s, background 0.15s;
-  font-family: inherit;
-}
-
-.nav-btn:hover { color: var(--text); background: var(--surface2); }
-.nav-btn.active { color: var(--text); background: var(--surface2); font-weight: 600; }
 
 /* ── Main ───────────────────────────────────────────────────────────────── */
 main {
@@ -97,15 +72,6 @@ main {
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
   width: 100%;
-}
-
-/* ── Footer ─────────────────────────────────────────────────────────────── */
-footer {
-  border-top: 1px solid var(--border);
-  text-align: center;
-  padding: 1.25rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
@@ -125,8 +91,8 @@ footer {
 
 .hero p {
   color: var(--text-muted);
-  font-size: 1.1rem;
-  max-width: 560px;
+  font-size: 1.05rem;
+  max-width: 540px;
   margin: 0 auto;
 }
 
@@ -145,7 +111,6 @@ footer {
   padding: 1.75rem;
   cursor: pointer;
   transition: border-color 0.2s, transform 0.15s, background 0.2s;
-  text-align: center;
 }
 
 .home-card:hover {
@@ -154,9 +119,8 @@ footer {
   transform: translateY(-2px);
 }
 
-.home-card-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-.home-card h2 { font-size: 1.25rem; margin-bottom: 0.4rem; }
-.home-card p { color: var(--text-muted); font-size: 0.9rem; }
+.home-card h2 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.home-card p  { color: var(--text-muted); font-size: 0.875rem; }
 
 /* ── Faction Strip ──────────────────────────────────────────────────────── */
 .home-factions-preview { margin-top: 1rem; }
@@ -185,13 +149,12 @@ footer {
 
 .faction-strip-item:hover { background: var(--surface2); transform: translateY(-2px); }
 
-.strip-banner { font-size: 1.5rem; }
-.strip-name   { font-weight: 700; font-size: 1rem; }
-.strip-count  { color: var(--text-muted); font-size: 0.8rem; }
+.strip-name  { font-weight: 700; font-size: 1rem; }
+.strip-count { color: var(--text-muted); font-size: 0.8rem; }
 
 /* ── Section Title ──────────────────────────────────────────────────────── */
 .section-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 1rem;
   display: flex;
@@ -206,7 +169,7 @@ footer {
   background: var(--surface2);
   color: var(--text-muted);
   border-radius: 99px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   padding: 1px 8px;
   border: 1px solid var(--border);
@@ -239,9 +202,8 @@ footer {
 
 .card:hover { background: var(--surface2); transform: translateY(-2px); }
 
-.card-banner { font-size: 2.5rem; }
-.card-title  { font-size: 1.15rem; font-weight: 700; }
-.card-desc   { color: var(--text-muted); font-size: 0.875rem; line-height: 1.55; flex: 1; }
+.card-title { font-size: 1.15rem; font-weight: 700; }
+.card-desc  { color: var(--text-muted); font-size: 0.875rem; line-height: 1.55; flex: 1; }
 
 .card-meta {
   display: flex;
@@ -283,7 +245,7 @@ footer {
 }
 
 .filter-btn:hover  { color: var(--text); border-color: var(--accent); }
-.filter-btn.active { color: var(--text); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+.filter-btn.active { color: #0e150f; background: var(--accent); border-color: var(--accent); font-weight: 600; }
 
 /* ── POI Card ───────────────────────────────────────────────────────────── */
 .poi-card-top {
@@ -312,10 +274,10 @@ footer {
   border-radius: 4px;
 }
 
-.status-active   { color: #4ade80; background: #4ade8015; }
-.status-inactive { color: #f87171; background: #f8717115; }
+.status-active   { color: #8ab870; background: #8ab87015; }
+.status-inactive { color: #c47c5a; background: #c47c5a15; }
 
-.coords-inline { font-size: 0.75rem; color: var(--text-muted); }
+.coords-inline { font-size: 0.75rem; color: var(--text-muted); font-family: 'Consolas', monospace; }
 
 /* ── Members Grid ───────────────────────────────────────────────────────── */
 .members-grid {
@@ -373,7 +335,7 @@ footer {
 .detail-hero {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 5px solid var(--accent, var(--border));
+  border-left: 4px solid var(--accent, var(--border));
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
@@ -381,8 +343,6 @@ footer {
   align-items: flex-start;
   margin-bottom: 2rem;
 }
-
-.detail-banner { font-size: 4rem; line-height: 1; flex-shrink: 0; }
 
 .detail-hero-text h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.6rem; }
 .detail-hero-text p  { color: var(--text-muted); line-height: 1.65; }
@@ -444,9 +404,9 @@ footer {
   flex-shrink: 0;
 }
 
-.member-row-info  { display: flex; flex-direction: column; gap: 2px; }
-.member-row-name  { font-weight: 700; font-size: 0.95rem; }
-.member-row-role  { color: var(--text-muted); font-size: 0.8rem; }
+.member-row-info { display: flex; flex-direction: column; gap: 2px; }
+.member-row-name { font-weight: 700; font-size: 0.95rem; }
+.member-row-role { color: var(--text-muted); font-size: 0.8rem; }
 
 /* ── POI Row ────────────────────────────────────────────────────────────── */
 .poi-list { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -483,12 +443,8 @@ footer {
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .header-inner { flex-direction: column; height: auto; padding: 0.75rem 1rem; gap: 0.5rem; }
-  nav { gap: 0.15rem; }
-  .nav-btn { padding: 0.35rem 0.65rem; font-size: 0.8rem; }
   .detail-hero { flex-direction: column; }
   .member-detail-hero { flex-direction: column; align-items: flex-start; }
-  .detail-banner { font-size: 3rem; }
   .hero h1 { font-size: 1.8rem; }
   main { padding: 1.5rem 1rem; }
 }
